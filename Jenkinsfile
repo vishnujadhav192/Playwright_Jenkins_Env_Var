@@ -36,6 +36,8 @@ pipeline {
             string(credentialsId: 'user-message-secret', variable: 'USER_MESSAGE')
           ]) {
                 powershell '''
+                  Write-Host "Injected USER_NAME=$env:USER_NAME"
+                  Write-Host "Injected USER_MESSAGE=$env:USER_MESSAGE"
                   $envContent = @(
                     "USER_NAME=$env:USER_NAME"
                     "USER_MESSAGE=$env:USER_MESSAGE"
