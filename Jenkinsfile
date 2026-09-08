@@ -27,7 +27,7 @@ pipeline {
       steps {
         powershell 'npx playwright install --with-deps'
       }
-    }	
+    }
     stage('▶️ Run Playwright Tests') {
       steps {
         script {
@@ -36,23 +36,23 @@ pipeline {
             string(credentialsId: 'USER_MESSAGE', variable: 'USER_MESSAGE')
           ]) {
             powershell """
-              # Create .env file dynamically from Jenkins credentials
-
-                @"
-                USER_NAME=$env:USER_NAME
-                USER_MESSAGE=$env:USER_MESSAGE
-                "@ | Out-File -Encoding UTF8 .env
+              # Build .env content safely
+              $envContent = @(
+                "USER_NAME=$env:USER_NAME"
+                "USER_MESSAGE=$env:USER_MESSAGE"
+              )
+              $envContent | Set-Content -Encoding UTF8 .env
 
               # Run Playwright tests
               npx playwright test tests/example.spec.ts --project=chromium
 
-              # Clean up .env after run
+              # Clean up
               Remove-Item .env -Force
             """
           }
         }
       }
-    }
+    }    
   }
 
   post {
