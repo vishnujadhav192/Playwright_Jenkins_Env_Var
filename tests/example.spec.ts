@@ -9,8 +9,7 @@ test('Greetings', async () => {
   const userMessage = process.env.USER_MESSAGE;
 
   console.log(`Hello ${userName} !!!! ${userMessage}`);
-  console.log(`Hello ${process.env.USER_NAME} !!!! ${process.env.USER_MESSAGE}`);
 
-  expect(process.env.USER_NAME).toBe("Vishnu");
-  expect(process.env.USER_MESSAGE).toBe("Welcome to team");
+  expect(userName).toBe("Vishnu");
+  expect(userMessage).toBe("Welcome to team");
 });
