@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import * as dotenv from 'dotenv';
 
 // Load variables from .env file
@@ -10,4 +10,7 @@ test('Greetings', async () => {
 
   console.log(`Hello ${userName} !!!! ${userMessage}`);
   console.log(`Hello ${process.env.USER_NAME} !!!! ${process.env.USER_MESSAGE}`);
+
+  expect(process.env.USER_NAME).toBe("Vishnu");
+  expect(process.env.USER_MESSAGE).toBe("Welcome to team");
 });
