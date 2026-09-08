@@ -9,4 +9,5 @@ test('Greetings', async () => {
   const userMessage = process.env.USER_MESSAGE;
 
   console.log(`Hello ${userName} !!!! ${userMessage}`);
+  console.log(`Hello ${process.env.USER_NAME} !!!! ${process.env.USER_MESSAGE}`);
 });
