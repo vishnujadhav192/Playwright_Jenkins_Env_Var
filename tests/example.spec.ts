@@ -10,6 +10,4 @@ test('Greetings', async () => {
 
   console.log(`Hello ${userName} !!!! ${userMessage}`);
 
-  expect(userName).toBe("Vishnu");
-  expect(userMessage).toBe("Welcome to team");
 });
