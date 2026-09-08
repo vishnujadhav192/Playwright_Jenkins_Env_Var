@@ -32,8 +32,8 @@ pipeline {
       steps {
         script {
           withCredentials([
-            string(credentialsId: 'USER_NAME', variable: 'USER_NAME'),
-            string(credentialsId: 'USER_MESSAGE', variable: 'USER_MESSAGE')
+            string(credentialsId: 'user-name-secret', variable: 'USER_NAME'),
+            string(credentialsId: 'user-message-secret', variable: 'USER_MESSAGE')
           ]) {
                 powershell '''
                   $envContent = @(
