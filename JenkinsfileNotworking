@@ -8,8 +8,6 @@ pipeline {
   environment {
     NODE_ENV = 'test'
     CI = '1'
-    USER_NAME = 'Vishnu'
-    USER_MESSAGE = 'Welcome to team'
   }
 
   stages {
@@ -33,12 +31,23 @@ pipeline {
     stage('▶️ Run Playwright Tests') {
       steps {
         script {
-			powershell '''
-				Write-Host "USER_NAME=$env:USER_NAME"
-				Write-Host "USER_MESSAGE=$env:USER_MESSAGE"
+          withCredentials([
+            string(credentialsId: 'user-name-secret', variable: 'USER_NAME'),
+            string(credentialsId: 'user-message-secret', variable: 'USER_MESSAGE')
+          ]) {
+                powershell '''
+                  Write-Host "Injected USER_NAME=$env:USER_NAME"
+                  Write-Host "Injected USER_MESSAGE=$env:USER_MESSAGE"
+                  $envContent = @(
+                    "USER_NAME=$env:USER_NAME"
+                    "USER_MESSAGE=$env:USER_MESSAGE"
+                  )
+                  $envContent | Set-Content -Encoding UTF8 .env
 
-				npx playwright test tests/example.spec.ts --project=chromium
-			'''
+                  npx playwright test tests/example.spec.ts --project=chromium
+                  Remove-Item .env -Force
+                '''
+          }
         }
       }
     }
