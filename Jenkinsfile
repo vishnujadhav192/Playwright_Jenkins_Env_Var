@@ -35,16 +35,16 @@ pipeline {
             string(credentialsId: 'USER_NAME', variable: 'USER_NAME'),
             string(credentialsId: 'USER_MESSAGE', variable: 'USER_MESSAGE')
           ]) {
-                powershell """
-                  `$envContent = @(
+                powershell '''
+                  $envContent = @(
                     "USER_NAME=$env:USER_NAME"
                     "USER_MESSAGE=$env:USER_MESSAGE"
                   )
-                  `$envContent | Set-Content -Encoding UTF8 .env
+                  $envContent | Set-Content -Encoding UTF8 .env
 
                   npx playwright test tests/example.spec.ts --project=chromium
                   Remove-Item .env -Force
-                """
+                '''
           }
         }
       }
