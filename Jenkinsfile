@@ -8,8 +8,6 @@ pipeline {
   environment {
     NODE_ENV = 'test'
     CI = '1'
-    USERNAME1 = 'standard_user'
-    PASSWORD1 = 'secret_sauce'
   }
 
   stages {
@@ -33,12 +31,15 @@ pipeline {
     stage('▶️ Run Playwright Tests') {
       steps {
         script {
-			powershell '''
-				Write-Host "USERNAME1=$env:USERNAME1"
-				Write-Host "PASSWORD1=$env:PASSWORD1"
-
-				npx playwright test tests/example.spec.ts --project=chromium
-			'''
+          withCredentials([
+            string(credentialsId: 'USERNAME1-secret', variable: 'USERNAME1'),
+            string(credentialsId: 'PASSWORD1-secret', variable: 'PASSWORD1')
+          ]) {
+            powershell """
+              # Run Playwright tests with secrets injected
+              npx playwright test tests/example.spec.ts --project=chromium
+            """
+          }
         }
       }
     }

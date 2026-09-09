@@ -9,8 +9,8 @@ jobs:
     timeout-minutes: 60
     runs-on: windows-latest
     env:
-      USER_NAME: ${{ vars.NAME }}
-      USER_MESSAGE: ${{ vars.MESSAGE }}
+      USERNAME1: ${{ vars.USERNAME1 }}
+      PASSWORD1: ${{ vars.PASSWORD1 }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
