@@ -8,8 +8,8 @@ pipeline {
   environment {
     NODE_ENV = 'test'
     CI = '1'
-    USER_NAME = 'Vishnu'
-    USER_MESSAGE = 'Welcome to team'
+    USERNAME1 = 'standard_user'
+    PASSWORD1 = 'secret_sauce'
   }
 
   stages {
