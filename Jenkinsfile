@@ -34,8 +34,8 @@ pipeline {
       steps {
         script {
 			powershell '''
-				Write-Host "USER_NAME=$env:USER_NAME"
-				Write-Host "USER_MESSAGE=$env:USER_MESSAGE"
+				Write-Host "USERNAME1=$env:USERNAME1"
+				Write-Host "PASSWORD1=$env:PASSWORD1"
 
 				npx playwright test tests/example.spec.ts --project=chromium
 			'''
