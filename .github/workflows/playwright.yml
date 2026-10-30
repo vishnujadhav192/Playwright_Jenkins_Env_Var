@@ -4,6 +4,13 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
+  schedule:
+    # Runs every day at 4:00 AM UTC (Adjust cron expression as needed)
+    - cron: '0 4 * * *'
+  # Allows you to manually trigger the workflow from the Actions tab
+  workflow_dispatch:
+    
 jobs:
   test:
     timeout-minutes: 60
